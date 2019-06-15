@@ -6,11 +6,12 @@ import {connect} from 'react-redux'
  * COMPONENT
  */
 export const UserHome = props => {
-  const {email} = props
+  const {name, balance} = props
 
   return (
     <div>
-      <h3>Welcome, {email}</h3>
+      <h3>Welcome, {name}</h3>
+      <h3>Your current balance is $ {balance / 100}</h3>
     </div>
   )
 }
@@ -20,7 +21,8 @@ export const UserHome = props => {
  */
 const mapState = state => {
   return {
-    email: state.user.email
+    name: state.user.name,
+    balance: state.user.balance
   }
 }
 
@@ -30,5 +32,6 @@ export default connect(mapState)(UserHome)
  * PROP TYPES
  */
 UserHome.propTypes = {
-  email: PropTypes.string
+  name: PropTypes.string,
+  balance: PropTypes.number
 }
