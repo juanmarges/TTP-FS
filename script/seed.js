@@ -1,8 +1,7 @@
 'use strict';
 
-const db = require('../server/db')
-const {User, Stock} = require('../server/db/models')
-
+const db = require('../server/db');
+const {User, Stock} = require('../server/db/models');
 
 async function seed() {
   await db.sync({force: true});
@@ -20,15 +19,15 @@ async function seed() {
     Stock.create({symbol: 'goog', shares: 3, purchasePrice: 110682}),
     Stock.create({symbol: 'amzn', shares: 4, purchasePrice: 189900}),
     Stock.create({symbol: 'msft', shares: 8, purchasePrice: 13302})
-  ])
+  ]);
 
   for (let i = 0; i < stocks.length; i++) {
-    await stocks[i].setUser(users[i % 2])
+    await stocks[i].setUser(users[i % 2]);
   }
 
-  console.log(`seeded ${users.length} users`)
-  console.log(`seeded ${stocks.length} stocks`)
-  console.log(`seeded successfully`)
+  console.log(`seeded ${users.length} users`);
+  console.log(`seeded ${stocks.length} stocks`);
+  console.log(`seeded successfully`);
 }
 
 // We've separated the `seed` function from the `runSeed` function.

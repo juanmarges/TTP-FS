@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Stock = db.define('stock', {
   symbol: {
@@ -10,24 +10,24 @@ const Stock = db.define('stock', {
     type: Sequelize.INTEGER,
     allowNull: false
   }
-})
+});
 
 Stock.buy = async function(symbol, shares) {
-  let stock
+  let stock;
   stock = await Stock.findOne({
     where: {
       symbol: symbol
     }
-  })
+  });
   if (stock) {
     await stock.update({
       shares: stock.shares + shares
-    })
-    await stock.save()
+    });
+    await stock.save();
   } else {
-    stock = await Stock.create({symbol, shares})
+    stock = await Stock.create({symbol, shares});
   }
-  return stock
-}
+  return stock;
+};
 
-module.exports = Stock
+module.exports = Stock;

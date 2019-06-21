@@ -1,22 +1,25 @@
-import axios from 'axios'
+import axios from 'axios';
 
 /**
  * ACTION TYPES
  */
 
-const GET_TRANSACTIONS = 'GET_TRANSACTIONS'
+const GET_TRANSACTIONS = 'GET_TRANSACTIONS';
 
 /**
  * INITIAL STATE
  */
 
-const defaultTransactions = []
+const defaultTransactions = [];
 
 /**
  * ACTION CREATORS
  */
 
-const getTransactions = transactions => ({type: GET_TRANSACTIONS, transactions})
+const getTransactions = transactions => ({
+  type: GET_TRANSACTIONS,
+  transactions
+});
 
 /**
  * THUNK CREATORS
@@ -24,13 +27,13 @@ const getTransactions = transactions => ({type: GET_TRANSACTIONS, transactions})
 
 export const loadTransactions = () => async dispatch => {
   try {
-    const res = await axios.get('/api/transactions')
-    console.log(res.data)
-    dispatch(getTransactions(res.data || defaultTransactions))
+    const res = await axios.get('/api/transactions');
+    console.log(res.data);
+    dispatch(getTransactions(res.data || defaultTransactions));
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
-}
+};
 
 /**
  * REDUCER
@@ -38,8 +41,8 @@ export const loadTransactions = () => async dispatch => {
 export default function(state = defaultTransactions, action) {
   switch (action.type) {
     case GET_TRANSACTIONS:
-      return action.transactions
+      return action.transactions;
     default:
-      return state
+      return state;
   }
 }

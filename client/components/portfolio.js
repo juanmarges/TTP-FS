@@ -1,14 +1,14 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {SharesPage, BuyForm} from './index'
-import {loadStocks} from '../store'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {SharesPage, BuyForm} from './index';
+import {loadStocks} from '../store';
 
 /**
  * COMPONENT
  */
 class Portfolio extends Component {
   componentDidMount() {
-    this.props.onLoadStocks()
+    this.props.onLoadStocks();
   }
 
   render() {
@@ -17,7 +17,7 @@ class Portfolio extends Component {
         <SharesPage />
         <BuyForm />
       </div>
-    )
+    );
   }
 }
 
@@ -28,9 +28,9 @@ class Portfolio extends Component {
 const mapDispatch = dispatch => {
   return {
     onLoadStocks() {
-      dispatch(loadStocks())
+      dispatch(loadStocks());
     }
-  }
-}
+  };
+};
 
-export default connect(null, mapDispatch)(Portfolio)
+export default connect(null, mapDispatch)(Portfolio);

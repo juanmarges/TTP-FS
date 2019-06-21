@@ -1,11 +1,11 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {buyStock} from '../store'
+import React from 'react';
+import {connect} from 'react-redux';
+import {buyStock} from '../store';
 
-const utils = require('../../constants')
+const utils = require('../../constants');
 
 const BuyForm = props => {
-  const {balance, error, handleSubmit} = props
+  const {balance, error, handleSubmit} = props;
   return (
     <div>
       <h3>Cash - {utils.toDollars(balance)}</h3>
@@ -28,25 +28,25 @@ const BuyForm = props => {
       </form>
       {error && error.response && <div> {error.response.data} </div>}
     </div>
-  )
-}
+  );
+};
 
 const mapState = state => {
   return {
     balance: state.user.balance,
     id: state.user.id
-  }
-}
+  };
+};
 
 const mapBuy = dispatch => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault()
-      const symbol = evt.target.symbol.value
-      const shares = evt.target.shares.value
-      console.log(symbol)
-      dispatch(buyStock(symbol, shares))
+      evt.preventDefault();
+      const symbol = evt.target.symbol.value;
+      const shares = evt.target.shares.value;
+      console.log(symbol);
+      dispatch(buyStock(symbol, shares));
     }
-  }
-}
-export default connect(mapState, mapBuy)(BuyForm)
+  };
+};
+export default connect(mapState, mapBuy)(BuyForm);

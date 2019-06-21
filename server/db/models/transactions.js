@@ -1,5 +1,5 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require('sequelize');
+const db = require('../db');
 
 const Transaction = db.define('transaction', {
   symbol: {
@@ -14,6 +14,6 @@ const Transaction = db.define('transaction', {
     type: Sequelize.INTEGER,
     allowNull: false
   }
-})
+});
 
-module.exports = Transaction
+module.exports = Transaction;
