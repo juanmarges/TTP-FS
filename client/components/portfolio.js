@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {SharesPage, BuyForm} from './index'
-import {loadStocks, loadCurrentPrices} from '../store'
+import {loadStocks} from '../store'
 
 /**
  * COMPONENT
  */
 class Portfolio extends Component {
   componentDidMount() {
-    this.props.onLoadStocks(this.props.userId)
+    this.props.onLoadStocks()
   }
 
   render() {
@@ -24,19 +24,13 @@ class Portfolio extends Component {
 /**
  * CONTAINER
  */
-const mapState = state => {
-  return {
-    userId: state.user.id,
-    stocks: state.stocks
-  }
-}
 
 const mapDispatch = dispatch => {
   return {
-    onLoadStocks(userId) {
-      dispatch(loadStocks(userId))
+    onLoadStocks() {
+      dispatch(loadStocks())
     }
   }
 }
 
-export default connect(mapState, mapDispatch)(Portfolio)
+export default connect(null, mapDispatch)(Portfolio)

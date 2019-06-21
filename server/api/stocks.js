@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const {Stock} = require('../db/models')
+const {Stock, Transaction} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
@@ -21,13 +21,18 @@ router.post('/buy', async (req, res, next) => {
     const user = req.user
     const shares = parseInt(req.body.shares, 10)
     const symbol = req.body.symbol.toLowerCase()
-    const purchasePrice = req.body.purchasePrice * 100
+    const purchasePrice = req.body.purchasePrice * 100 * shares
     if (user.balance < shares * purchasePrice) {
       res.status(401).send('Cannot purchase. Not enough cash.')
     } else {
-      const stock = await Stock.buy(symbol, shares, purchasePrice)
-      console.log(stock)
+      const stock = await Stock.buy(symbol, shares)
+      const transaction = await Transaction.create({
+        symbol,
+        shares,
+        purchasePrice
+      })
       await stock.setUser(user)
+      await transaction.setUser(user)
       await user.update({
         balance: user.balance - shares * purchasePrice
       })

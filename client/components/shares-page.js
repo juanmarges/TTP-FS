@@ -12,7 +12,7 @@ const SharesPage = props => {
       <h3>Portfolio ({utils.toDollars(total)})</h3>
       {stocks.length > 0 ? (
         stocks.map(stock => (
-          <StockCard key={`${stock.symbol}-${stock.id}`} stock={stock} />
+          <StockCard key={`stk-${stock.symbol}-${stock.id}`} stock={stock} />
         ))
       ) : (
         <h3>You currently have no shares</h3>

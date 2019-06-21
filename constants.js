@@ -10,9 +10,16 @@ function toPennies(dollars) {
   return dollars * 100
 }
 
-function totalPortfolio(stocks) {
+function totalPortfolio(stocks = []) {
   return stocks.reduce((total, stock) => {
-    total += stock.shares * stock.purchasePrice
+    total += stock.shares * stock.latestPrice
+    return total
+  }, 0)
+}
+
+function totalTransactions(transactions = []) {
+  return transactions.reduce((total, transaction) => {
+    total += transaction.shares * transaction.purchasePrice
     return total
   }, 0)
 }
@@ -22,5 +29,6 @@ module.exports = {
   pubKey,
   toDollars,
   toPennies,
-  totalPortfolio
+  totalPortfolio,
+  totalTransactions
 }
