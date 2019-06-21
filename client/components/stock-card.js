@@ -6,11 +6,9 @@ const StockCard = props => {
   const {stock} = props
   return (
     <div>
-      <h4>{`${stock.symbol.toUpperCase()} - ${
-        stock.shares
-      } shares ${utils.toDollars(stock.purchasePrice)}`}</h4>
-      <h5>Purchase Price: {utils.toDollars(stock.purchasePrice)}</h5>
-      <h5>Current Price: {utils.toDollars(stock.currentPrice)}</h5>
+      <h4>{`${stock.symbol.toUpperCase()} - ${stock.shares}`}</h4>
+      <h5>Open Price: {utils.toDollars(stock.openPrice)}</h5>
+      <h5>Current Price: {utils.toDollars(stock.latestPrice)}</h5>
       <br />
     </div>
   )

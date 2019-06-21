@@ -1,5 +1,4 @@
 import axios from 'axios'
-import history from '../history'
 
 const utils = require('../../constants')
 
@@ -29,11 +28,13 @@ const addStock = stock => ({type: ADD_STOCK, stock})
 export const loadCurrentPrices = symbols => async dispatch => {
   try {
     const iexCheck = await axios.get(`${utils.iexBase}${symbols.join(',')}`)
-    console.log(iexCheck.data)
     let prices = {}
     for (let key in iexCheck.data) {
       const stock = key.toLowerCase()
-      prices[stock] = iexCheck.data[key].quote.latestPrice * 100
+      prices[stock] = [
+        iexCheck.data[key].quote.open * 100,
+        iexCheck.data[key].quote.latestPrice * 100
+      ]
     }
     dispatch(getCurrentPrices(prices))
   } catch (err) {
@@ -58,8 +59,8 @@ export const buyStock = (symbol, shares) => async dispatch => {
     if (iexCheck.status === 404) {
       alert(`Stock ${symbol} not found`)
     } else {
-      const purchasePrice =
-        iexCheck.data[symbol.toUpperCase()].quote.latestPrice
+      const iexData = iexCheck.data[symbol.toUpperCase()].quote
+      const purchasePrice = iexData.latestPrice
       var buy = confirm(
         `${shares} shares of ${symbol} will cost ${purchasePrice} each.\nDo you still want to purchase?`
       )
@@ -69,7 +70,10 @@ export const buyStock = (symbol, shares) => async dispatch => {
           shares,
           purchasePrice
         })
-        dispatch(addStock(res.data))
+        let stock = res.data
+        stock.openPrice = iexData.open * 100
+        stock.latestPrice = iexData.latestPrice * 100
+        dispatch(addStock(stock))
       }
     }
   } catch (err) {
@@ -86,15 +90,14 @@ export default function(state = defaultStocks, action) {
       return action.stocks
     case GET_CURRENT_PRICES:
       currentState.forEach(stock => {
-        console.log('before ', stock)
-        stock.currentPrice = action.prices[stock.symbol]
-        console.log('after ', stock)
+        stock.openPrice = action.prices[stock.symbol][0]
+        stock.latestPrice = action.prices[stock.symbol][1]
       })
       return currentState
     case ADD_STOCK:
       const symbolIndex = currentState
         .map(stock => stock.symbol)
-        .findIndex(action.stock.symbol)
+        .findIndex(symbol => symbol === action.stock.symbol)
       if (symbolIndex > -1) currentState[symbolIndex] = action.stock
       else currentState.push(action.stock)
       return currentState

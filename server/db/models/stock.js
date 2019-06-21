@@ -9,28 +9,23 @@ const Stock = db.define('stock', {
   shares: {
     type: Sequelize.INTEGER,
     allowNull: false
-  },
-  purchasePrice: {
-    type: Sequelize.INTEGER,
-    allowNull: false
   }
 })
 
-Stock.buy = async function(symbol, shares, purchasePrice) {
+Stock.buy = async function(symbol, shares) {
   let stock
   stock = await Stock.findOne({
     where: {
       symbol: symbol
     }
   })
-  if (stock.id) {
+  if (stock) {
     await stock.update({
-      shares: stock.shares + shares,
-      purchasePrice: purchasePrice
+      shares: stock.shares + shares
     })
     await stock.save()
   } else {
-    stock = await Stock.create({symbol, shares, purchasePrice})
+    stock = await Stock.create({symbol, shares})
   }
   return stock
 }
