@@ -24,11 +24,20 @@ function totalTransactions(transactions = []) {
   }, 0);
 }
 
+function stockColor(openPrice, latestPrice) {
+  let color = 'has-text-';
+  if (openPrice < latestPrice) color += 'success';
+  else if (openPrice > latestPrice) color += 'danger';
+  else color += 'grey';
+  return color;
+}
+
 module.exports = {
   iexBase,
   pubKey,
   toDollars,
   toPennies,
   totalPortfolio,
-  totalTransactions
+  totalTransactions,
+  stockColor
 };

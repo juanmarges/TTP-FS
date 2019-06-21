@@ -7,22 +7,22 @@ const utils = require('../../constants');
 const BuyForm = props => {
   const {balance, error, handleSubmit} = props;
   return (
-    <div>
-      <h3>Cash - {utils.toDollars(balance)}</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="column">
+      <h3 className="is-size-3">Cash - {utils.toDollars(balance)}</h3>
+      <form className="vert-form" onSubmit={handleSubmit}>
+        <div className="field">
           <label htmlFor="symbol">
             <small>Symbol</small>
           </label>
           <input name="symbol" type="text" />
         </div>
-        <div>
+        <div className="field">
           <label htmlFor="shares">
             <small>Shares</small>
           </label>
-          <input name="shares" type="text" />
+          <input name="shares" type="number" />
         </div>
-        <div>
+        <div className="field">
           <button type="submit">Buy</button>
         </div>
       </form>

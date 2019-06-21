@@ -15,17 +15,20 @@ class Transactions extends Component {
     const {transactions, total} = this.props;
     return (
       <div>
-        <h3>Transactions</h3>
-        {transactions.length > 0 ? (
-          transactions.map(transaction => (
-            <TransactionCard
-              key={`trans-${transaction.symbol}-${transaction.id + 1000}`}
-              transaction={transaction}
-            />
-          ))
-        ) : (
-          <h3>You currently have no transactions</h3>
-        )}
+        <h3 className="is-size-3">Transactions</h3>
+        <hr />
+        <table>
+          {transactions.length > 0 ? (
+            transactions.map(transaction => (
+              <TransactionCard
+                key={`trans-${transaction.symbol}-${transaction.id + 1000}`}
+                transaction={transaction}
+              />
+            ))
+          ) : (
+            <h3>You currently have no transactions</h3>
+          )}
+        </table>
         <h3>Total {utils.toDollars(total)}</h3>
       </div>
     );

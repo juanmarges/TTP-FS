@@ -3,14 +3,18 @@ import React from 'react';
 const utils = require('../../constants');
 
 const StockCard = props => {
-  const {stock} = props;
+  const {symbol, shares, openPrice, latestPrice} = props.stock;
   return (
-    <div>
-      <h4>{`${stock.symbol.toUpperCase()} - ${stock.shares}`}</h4>
-      <h5>Open Price: {utils.toDollars(stock.openPrice)}</h5>
-      <h5>Current Price: {utils.toDollars(stock.latestPrice)}</h5>
+    <tr className="columns">
+      <td className="column">{symbol.toUpperCase()}</td>
+      <td className="column">{`${shares} Shares`}</td>
+      <td className="column">Open Price: {utils.toDollars(openPrice)}</td>
+      <td className={`column ${utils.stockColor(openPrice, latestPrice)}`}>
+        Current Price: {utils.toDollars(latestPrice)}
+      </td>
       <br />
-    </div>
+      <hr />
+    </tr>
   );
 };
 

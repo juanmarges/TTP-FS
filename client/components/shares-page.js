@@ -8,15 +8,17 @@ const utils = require('../../constants');
 const SharesPage = props => {
   const {stocks, total} = props;
   return (
-    <div>
-      <h3>Portfolio ({utils.toDollars(total)})</h3>
-      {stocks.length > 0 ? (
-        stocks.map(stock => (
-          <StockCard key={`stk-${stock.symbol}-${stock.id}`} stock={stock} />
-        ))
-      ) : (
-        <h3>You currently have no shares</h3>
-      )}
+    <div className="column">
+      <h3 className="is-size-3">Portfolio ({utils.toDollars(total)})</h3>
+      <table>
+        {stocks.length > 0 ? (
+          stocks.map(stock => (
+            <StockCard key={`stk-${stock.symbol}-${stock.id}`} stock={stock} />
+          ))
+        ) : (
+          <h3>You currently have no shares</h3>
+        )}
+      </table>
     </div>
   );
 };
