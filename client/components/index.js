@@ -5,4 +5,8 @@
  */
 export {default as Navbar} from './navbar'
 export {default as UserHome} from './user-home'
+export {default as Portfolio} from './portfolio'
+export {default as BuyForm} from './buy-form'
+export {default as SharesPage} from './shares-page'
+export {default as StockCard} from './stock-card'
 export {Login, Signup} from './auth-form'
