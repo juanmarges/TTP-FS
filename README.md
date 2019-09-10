@@ -22,11 +22,11 @@ For this assessment, you’ll need to implement a web based stock portfolio app.
 
 * Register and log in users. Each user will begin with a $ 5000.00 starting balance in their account.
 * Buy shares of stocks, both stocks you already own shares of and new stocks.
-** This application uses the IEX API to search the current price of a searched stock.
-** Any attempt to buy more than your current balance will be prevented, and the user will be notified that the purchase isn't allowed.
+ * This application uses the IEX API to search the current price of a searched stock.
+ * Any attempt to buy more than your current balance will be prevented, and the user will be notified that the purchase isn't allowed.
 * View your portfolio
-** Shows your current balance, as well as total assets.
-** Compares the purchase price of your stocks to the current price. 
-*** A higher current price will be shown in green 
-*** A lower current price will be shown in red
-*** An equal current price will be in black.
+ * Shows your current balance, as well as total assets.
+ * Compares the purchase price of your stocks to the current price. 
+  * A higher current price will be shown in green 
+  * A lower current price will be shown in red
+  * An equal current price will be in black.
